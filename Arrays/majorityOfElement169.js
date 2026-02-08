@@ -1,55 +1,75 @@
-var majorityElement = function(nums) {
-    
-    let result = nums[0];
-    let track = 1;
-    let min = 0
-    let pointer = 0
-    nums.sort()
+// var majorityElement = function(nums) {
 
-    for (var i = pointer; i < nums.length; i++) {
-        let broke = false
-   
-      
-        for (var j = pointer + 1; j < nums.length; j++) {
+//     let result = nums[0];
+//     let track = 1;
+//     let min = 0
+//     let pointer = 0
+//     nums.sort()
+
+//     for (var i = pointer; i < nums.length; i++) {
+//         let broke = false
+
+//         for (var j = pointer + 1; j < nums.length; j++) {
+
+//             if (nums[i] !== nums[j]) {
+
+//                 if (track > min) {
+//                     min = track;
+
+//                     result = nums[i]
+//                 }
+
+//                 pointer = j
+//                 track = 1
+//                 i = pointer - 1
+//                     broke = true
+
+//                 break
+//             }
+//             track = track + 1
+
+//         }
+
+//         if (!broke) {
+
+//             if (track > min) {
+
+//                 result = nums[i]
+//             }
+//             break
+//         }
+
+//     }
+//     return result
+// };
+
+//Boyer-Moore Majority Voting Algorithm appraoch
 
 
+var majorityElement = function (nums) {
 
+  let candidate = -1;
+  let count = 0;
 
-            if (nums[i] !== nums[j]) {
-           
-                if (track > min) {
-                    min = track;
-
-                    result = nums[i]
-                }
-
-                pointer = j
-                track = 1
-                i = pointer - 1
-                    broke = true
-               
-                break
-            }
-            track = track + 1
-        
-     
-        }
-
-    
-        if (!broke) {
-
-            if (track > min) {
-
-                result = nums[i]
-            }
-            break
-        }
+  for (let numb of nums) {
+ 
+    if (count == 0) {
+      candidate = numb;
      
     }
-    return result
+
+    if (candidate === numb) {
+      count++;
+    } else {
+      count--;
+    }
+
+  }
+
+  return candidate
 };
-
-
+const result = majorityElement([1, 1, 1, 2, 2, 2, 2, 1, 1,2,2,2,2,1]);
+console.log(result)
 //accepet but time limit exeed
 
 // var majorityElement = function (nums) {
