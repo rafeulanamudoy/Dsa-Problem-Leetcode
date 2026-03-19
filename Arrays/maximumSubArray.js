@@ -8,11 +8,10 @@ var maxSubArray = function (nums) {
 
       maxSum = Math.max(maxSum, sum);
     }
-    sum=0
   }
-  return maxSum
+  return maxSum;
 };
 
 const result = maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 
-console.log(result)
+console.log(result);
