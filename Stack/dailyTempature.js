@@ -2,7 +2,7 @@ var dailyTemperatures = function (temperatures) {
   let stack = [];
 
   let result = new Array(temperatures.length).fill(0);
-
+  console.log(temperatures[0 ]> temperatures[stack[stack.length - 1]],"check")
   for (let i = 0; i <= temperatures.length; i++) {
     while (temperatures[i] > temperatures[stack[stack.length - 1]]) {
       result[stack[stack.length - 1]] = i - (stack[stack.length -1]);
