@@ -23,16 +23,16 @@ var containsDuplicate = function (nums) {
 
     //optimize solution 
 
-      if (nums.length <= 1) return false;
+    if (nums.length <= 1) return false;
 
-  let set = new Set(nums);
-  return nums.length !== set.size;
+    let set = new Set(nums);
+    return nums.length !== set.size;
 
 
 
 };
 
 
-const result = containsDuplicate([7, 5, 3, 2, 1,4 ])
+const result = containsDuplicate([7, 5, 3, 2, 1, 4])
 
 console.log(result)
