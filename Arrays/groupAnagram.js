@@ -1,35 +1,60 @@
 var groupAnagrams = function (strs) {
 
-    let result = [strs[0]]
+    let result = [[strs[0]]]
 
 
     for (let i = 1; i < strs.length; i++) {
-         const text=strs[i]
-    
-        // const indexMap = new Map()
-        // for (let word = 0; word< text.length; word++) {
+        const currentText = strs[i]
 
-        //     if (indexMap.has(text[word])) {
+        let tempTrack = true;
+        
 
-        //         indexMap.set(text[word], indexMap.get(text[word] + 1))
+        const indexMap = new Map()
+        for (let word = 0; word < currentText.length; word++) {
 
-        //     } else {
+            if (indexMap.has(currentText[word])) {
 
-        //         indexMap.set(text[word], 1)
-        //     }
-        // }
+
+                indexMap.set(currentText[word], indexMap.get(currentText[word]) + 1)
+
+            } else {
+
+                indexMap.set(currentText[word], 1)
+            }
+        }
+
+
+
         for (let j = 0; j < result.length; j++) {
-            console.log(result,'check result')
+            const secondText = result[j][0]
+           
 
-            if (result[j].length !== text.length) {
-                result.push([text])
-                break
+
+            for (let trackWord = 0; secondText.length > 0; trackWord++) {
+                if (!indexMap.has(secondText[trackWord])) {
+                    tempTrack = false;
+              
+                    break
+
+                }
+                indexMap.set(secondText[i], indexMap.get(secondText[trackWord]) - 1);
+
+                if (indexMap.get(secondText[trackWord]) < 0) {
+                    tempTrack = false;
+              
+                    break
+                }
             }
 
-
-
+            tempTrack = true
+            result[j].push(currentText)
+            break
 
         }
+        if (!tempTrack) {
+            result.push([currentText])
+        }
+
     }
     return result
 
@@ -37,5 +62,5 @@ var groupAnagrams = function (strs) {
 
 //,"tan","ate","nat","bat"
 
-const result = groupAnagrams(["tan","eats"])
+const result = groupAnagrams(["tan", "eat", "ate", "tea", "nat", "bat"])
 console.log(result)
