@@ -64,6 +64,6 @@ var characterReplacement = function (s, k) {
 };
 
 
-const result = characterReplacement("AAAB", 0)
+const result = characterReplacement("AABABBA", 1)
 
 console.log(result)
