@@ -1,42 +1,80 @@
-var findMaxAverage = function (nums, k) {
-    let maximumAverage=-Infinity
+// var findMaxAverage = function (nums, k) {
+//     let maximumAverage=-Infinity
 
 
 
-    let leftPointer = 0
-    let rightPointer = leftPointer+k
+//     let leftPointer = 0
+//     let rightPointer = k
 
 
-    while (rightPointer <= nums.length) {
+//     while (rightPointer <= nums.length) {
 
-        let total = 0
+//         let total = 0
 
        
 
-        for (let i = leftPointer; i < rightPointer; i++) {
+//         for (let i = leftPointer; i < rightPointer; i++) {
               
-            total = total + nums[i]
+//             total = total + nums[i]
 
-        }
+//         }
 
-        console.log(total,"check total")
-         const localAverage=total / k
+   
+//          const localAverage=total / k
 
-        maximumAverage = Math.max(maximumAverage, localAverage)
+//         maximumAverage = Math.max(maximumAverage, localAverage)
 
 
       
 
-        rightPointer++
+//         rightPointer++
       
-        leftPointer++
-    }
+//         leftPointer++
+//     }
 
 
 
-    return maximumAverage
+//     return maximumAverage
+// };
+
+
+
+
+
+//optimize sliding window 
+// var findMaxAverage = function (nums, k) {
+//     let total = 0;
+
+
+//     for (let i = 0; i < k; i++) {
+//         total += nums[i];
+//     }
+
+//     let maximumAverage = total / k;
+
+//     let leftPointer = 0;
+//     let rightPointer = k;
+
+//     while (rightPointer < nums.length) {
+  
+//         total -= nums[leftPointer];
+
+  
+//         total += nums[rightPointer];
+
+//         const localAverage = total / k;
+//         maximumAverage = Math.max(maximumAverage, localAverage);
+
+//         leftPointer++;
+//         rightPointer++;
+//     }
+
+//     return maximumAverage;
+// };
+//kadanes algo
+var findMaxAverage = function (nums, k) {
+    
 };
-
 
 const result = findMaxAverage([4,0,4,3,3], 5)
 
