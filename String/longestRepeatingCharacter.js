@@ -1,69 +1,71 @@
+//brute force approach o(n2)
+// var characterReplacement = function (s, k) {
+//     let globalMax = 0;
+
+//     for (let left = 0; left < s.length; left++) {
+//         let substringFrequency = new Map();
+//         let highestFrequency = 0;
+
+
+//         for (let right = left; right < s.length; right++) {
+//             const char = s[right];
+
+//             substringFrequency.set(
+//                 char,
+//                 (substringFrequency.get(char) || 0) + 1
+//             );
+
+//             highestFrequency = Math.max(
+//                 highestFrequency,
+//                 substringFrequency.get(char)
+//             );
+
+//             const windowLength = right - left + 1;
+//             const replacementsNeeded =
+//                 windowLength - highestFrequency;
+
+//             if (replacementsNeeded <= k) {
+//                 globalMax = Math.max(globalMax, windowLength);
+//             }
+//         }
+//     }
+
+//     return globalMax;
+// };
+
 var characterReplacement = function (s, k) {
+    let left = 0;
+    let maxFrequency = 0;
+    let maxLength = 0;
+    const frequency = new Map();
 
-    let leftPointerOfSubstring = 0;
-
-    let global = 0;
-    while (leftPointerOfSubstring < s.length - k) {
+    for (let right = 0; right < s.length; right++) {
+        const char = s[right];
 
 
-        let substringFrequency = new Map()
-        let rightPointerOfSubstring = leftPointerOfSubstring + k
+        frequency.set(char, (frequency.get(char) || 0) + 1);
 
-        for (let i = leftPointerOfSubstring; (i <= rightPointerOfSubstring && rightPointerOfSubstring < s.length); i++) {
+      
+        maxFrequency = Math.max(
+            maxFrequency,
+            frequency.get(char)
+        );
 
-            if (substringFrequency.has(s[i])) {
+      
+        const windowLength = right - left + 1;
 
-                substringFrequency.set(s[i], substringFrequency.get(s[i]) + 1)
-            }
-            else {
-                substringFrequency.set(s[i], 1)
-            }
+        if (windowLength - maxFrequency > k) {
+  
+            const leftChar = s[left];
+            frequency.set(leftChar, frequency.get(leftChar) - 1);
+            left++;
         }
 
-        let highestFrequencyCharProp = [...substringFrequency.entries()].sort((a, b) => b[1] - a[1])[0]
 
-
-        console.log(highestFrequencyCharProp, substringFrequency)
-
-        let repeatSubstringLength = k == 0 ? 0 : k + 1;
-        let repeatSubstringFrequency = highestFrequencyCharProp[1]
-
-        for (let i = rightPointerOfSubstring + 1; i < s.length; i++) {
-
-            if (highestFrequencyCharProp[0] === s[i]) {
-                repeatSubstringLength = repeatSubstringLength + 1
-                continue
-            }
-            else {
-
-                if (repeatSubstringFrequency === 0) {
-                    break
-                }
-
-                repeatSubstringFrequency = repeatSubstringFrequency - 1;
-                repeatSubstringLength = repeatSubstringLength + 1
-
-
-            }
-
-            break
-
-        }
-
-        global = Math.max(global, repeatSubstringLength)
-
-        leftPointerOfSubstring++
-
-
-
-
+        maxLength = Math.max(maxLength, right - left + 1);
     }
 
-    return global
-
+    return maxLength;
 };
 
-
-const result = characterReplacement("AABABBA", 1)
-
-console.log(result)
+console.log(characterReplacement("AABABBA", 1)); // 4
